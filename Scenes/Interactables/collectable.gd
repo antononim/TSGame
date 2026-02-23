@@ -8,7 +8,8 @@ var collected := false:
 		collected = value
 		if not collected and anim_player:
 			show()
-			anim_player.play("RESET")
+			if anim_player.has_animation("RESET"):
+				anim_player.play("RESET")
 			process_mode = Node.PROCESS_MODE_INHERIT
 		elif collected:
 			hide()
@@ -19,7 +20,8 @@ func _ready():
 	pass # Replace with function body.
 
 func collect():
-	anim_player.play("Collected")
+	if anim_player.has_animation("Collected"):
+		anim_player.play("Collected")
 	await anim_player.animation_finished
 	collected = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -3,6 +3,9 @@ extends Control
 signal play_pressed
 signal level_select_pressed
 
+func _on_exit():
+	get_tree().quit()
+
 func _on_play_pressed():
 	play_pressed.emit()
 

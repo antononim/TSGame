@@ -23,6 +23,10 @@ SceneTrainsition="*res://Scenes/Enemies/Autoloads/scene_trainsition.tscn"
 
 project/assembly_name="Platformer Template"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 move_left={

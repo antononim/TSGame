@@ -34,7 +34,7 @@ func _process(delta):
 func after_ready():
 	#As the player is added to the tilemap, it needs to wait a frame for 
 	#everything to get ready!
-	player.set_up_camera_limit(boundry_rect)
+	#player.set_up_camera_limit(boundry_rect)
 	starting_pos = player.position
 
 func on_player_touched(node:Interactable):
