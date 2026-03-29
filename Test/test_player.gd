@@ -58,6 +58,21 @@ func test_set_up_camera_limit():
 	assert_eq(player.camera.limit_right, 110)
 	assert_eq(player.camera.limit_bottom, 220)
 
+func test_set_up_camera_limit_takes_negative_rect():
+	var rect = Rect2i(-100, -200, 50, 80)
+	player.set_up_camera_limit(rect)
+	assert_eq(player.camera.limit_left, 0)
+	assert_eq(player.camera.limit_top, 0)
+
+func test_knockback_pushes_player_backwards():
+	var dummy = Node2D.new()
+	dummy.global_position = player.global_position + Vector2.RIGHT * 10
+	player.health = 3
+
+	player.take_hit(dummy)
+
+	assert_lt(player.velocity.x, 0)
+
 func test_coyote_timer_timeout_resets_flag():
 	player.coyote = true
 	player._on_coyote_timer_timeout()

@@ -3,13 +3,10 @@ class_name Actor
 
 const DEFAULT_SPEED = 300.0
 const DEFAULT_JUMP_HEIGHT = 2.5
-const  TILESIZE = Vector2(70, 70)
+const TILESIZE = Vector2(70, 70)
 
 @export var speed = DEFAULT_SPEED
-@export_range(0, 300, 1, "suffix:px", "or_greater", "or_less", "hide_slider") var jump_height : int = 2.5:
-	set(value):
-		jump_height = value
-		jump_vel = calculate_jump_velocity(jump_height)
+@export_range(0.0, 300.0, 0.1, "suffix:px", "or_greater", "or_less", "hide_slider") var jump_height : float = DEFAULT_JUMP_HEIGHT
 
 @onready var jump_vel = calculate_jump_velocity(jump_height)
 
@@ -60,13 +57,12 @@ func handle_cols():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal() * last_velocity.abs()*.1)
+			c.get_collider().apply_central_impulse(-c.get_normal() * last_velocity.length() * 0.1)
 
 
 func _on_hitbox_body_entered(body):
-	if body != self:
+	if body != self and body is Actor:
 		hit_body.emit(body)
-	pass # Replace with function body.
 
 #These functions are used when one actor "hits" another actor
 

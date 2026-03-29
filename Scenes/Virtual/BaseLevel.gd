@@ -94,10 +94,13 @@ func _on_tile_map_child_entered_tree(node):
 	if node.is_in_group("player"):
 		player = node as Player
 		player.player_lost_health.connect(_on_player_lost_health)
-		player.player_lost_all_health.connect(respawn)
+		player.player_lost_all_health.connect(_on_player_lost_all_health)
 	if node.is_in_group("actor"):
 		node = node as Actor
 		node.hit_body.connect(_on_hit_body.bind(node))
+
+func _on_player_lost_all_health():
+	call_deferred("respawn")
 
 func _on_hit_body(hitbody:Actor, hitter:Actor):
 	hitbody.take_hit(hitter) 
